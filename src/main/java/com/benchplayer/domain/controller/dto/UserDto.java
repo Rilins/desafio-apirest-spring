@@ -1,9 +1,5 @@
 package com.benchplayer.domain.controller.dto;
 
-import static java.util.Collections.emptyList;
-import static java.util.Optional.ofNullable;
-import static java.util.stream.Collectors.toList;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,8 +12,8 @@ public record UserDto(Long id, String name, AccountDto account, List<GameDto> ga
         this(
             model.getId(),
             model.getName(),
-            ofNullable(model.getAccount()).map(AccountDto::new).orElse(null),
-            ofNullable(model.getGames()).orElse(emptyList()).stream().map(GameDto::new).collect(toList())
+            Optional.ofNullable(model.getAccount()).map(AccountDto::new).orElse(null),
+            Optional.ofNullable(model.getGames()).orElse(List.of()).stream().map(GameDto::new).collect(Collectors.toList())
             );
 
     }
